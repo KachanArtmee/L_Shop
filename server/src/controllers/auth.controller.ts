@@ -7,9 +7,8 @@ export class AuthController {
     static register(req: Request, res: Response) {
         try {
             const body: UserModel = req.body;
-            const userService = new UserService();
 
-            const result = userService.register(body);
+            const result = UserService.register(body);
             if (!result.success) {
                 res.status(400).json(result);
                 return;
@@ -50,8 +49,7 @@ export class AuthController {
                 return;
             }
 
-            const userService = new UserService();
-            const result = userService.login(identifier, password);
+            const result = UserService.login(identifier, password);
             if (!result.success) {
                 res.status(401).json(result);
                 return;
@@ -81,8 +79,7 @@ export class AuthController {
 
     static logout(req: Request, res: Response) {
         try {
-            const userService = new UserService();
-            const result = userService.logout();
+            const result = UserService.logout();
 
             res.clearCookie(COOKIE_CONF.name, {
                 httpOnly: COOKIE_CONF.httpOnly,
@@ -111,8 +108,7 @@ export class AuthController {
                 return;
             }
 
-            const userService = new UserService();
-            const result = userService.getUser(userId);
+            const result = UserService.getUser(userId);
 
             if (!result.success) {
                 res.status(404).json(result);
