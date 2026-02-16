@@ -7,8 +7,8 @@ export class AuthController {
     static register(req: Request, res: Response) {
         try {
             const body: UserModel = req.body;
-
             const result = UserService.register(body);
+
             if (!result.success) {
                 res.status(400).json(result);
                 return;
@@ -21,18 +21,13 @@ export class AuthController {
                 sameSite: COOKIE_CONF.sameSite as any,
             });
 
-            const response: AuthResponse = {
+            res.status(200).json({
                 success: true,
                 message: 'Регистрация успешна',
                 user: result.user
-            };
-
-            res.status(200).json(response);
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                message: 'Ошибка при регистрации'
             });
+        } catch (error) {
+            res.status(500).json({ success: false });
         }
     }
 
@@ -40,14 +35,6 @@ export class AuthController {
         try {
             const { email, login, phone, password } = req.body;
             const identifier = email || login || phone;
-
-            if (!identifier || !password) {
-                res.status(400).json({
-                    success: false,
-                    message: 'Требуется email/login/phone и пароль'
-                });
-                return;
-            }
 
             const result = UserService.login(identifier, password);
             if (!result.success) {
@@ -62,38 +49,18 @@ export class AuthController {
                 sameSite: COOKIE_CONF.sameSite as any,
             });
 
-            const response: AuthResponse = {
+            res.status(200).json({
                 success: true,
-                message: 'Вход выполнен',
                 user: result.user
-            };
-
-            res.status(200).json(response);
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                message: 'Ошибка при входе'
             });
+        } catch (error) {
+            res.status(500).json({ success: false });
         }
     }
 
     static logout(req: Request, res: Response) {
-        try {
-            const result = UserService.logout();
-
-            res.clearCookie(COOKIE_CONF.name, {
-                httpOnly: COOKIE_CONF.httpOnly,
-                secure: COOKIE_CONF.secure,
-                sameSite: COOKIE_CONF.sameSite as any,
-            });
-
-            res.status(200).json(result);
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                message: 'Ошибка при выходе'
-            });
-        }
+        res.clearCookie(COOKIE_CONF.name);
+        res.status(200).json({ success: true });
     }
 
     static getUser(req: Request, res: Response) {
@@ -101,10 +68,7 @@ export class AuthController {
             const userId = req.cookies[COOKIE_CONF.name];
 
             if (!userId) {
-                res.status(401).json({
-                    success: false,
-                    message: 'Пользователь не авторизован'
-                });
+                res.status(401).json({ success: false });
                 return;
             }
 
@@ -117,11 +81,7 @@ export class AuthController {
 
             res.status(200).json(result);
         } catch (error) {
-            res.status(500).json({
-                success: false,
-                message: 'Ошибка при получении пользователя'
-            });
+            res.status(500).json({ success: false });
         }
     }
-
 }

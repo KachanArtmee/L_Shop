@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
-const authRouter_1 = __importDefault(require("./src/router/authRouter"));
+const authRouter_1 = __importDefault(require("./src/router/auth.router"));
 const productRouter_1 = __importDefault(require("./src/router/productRouter"));
 const app = (0, express_1.default)();
 const PORT = 5000;

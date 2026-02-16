@@ -4,7 +4,7 @@ export interface UserModel {
     id: number | string;
     name: string;
     password: string;
-    email?: string;
+    email: string;
     phone?: string;
     login?: string;
 }
