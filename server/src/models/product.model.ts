@@ -24,6 +24,17 @@ export interface Product {
     discount?: number;
 }
 
+export interface BasketProduct {
+    count: number;
+    products: Product;
+}
+
+export interface Basket {
+    id: number | string;
+    userId: number | string;
+    basket: BasketProduct[];
+}
+
 export interface CartItem {
     productId: number | string;
     quantity: number;

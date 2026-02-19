@@ -1,1 +1,24 @@
-﻿[]
+﻿[
+  {
+    "id": "1",
+    "title": "Exam task",
+    "description": "This is a test product",
+    "price": 5000,
+    "isAvailable": true,
+    "categories": ["exams"],
+    "images": {
+      "preview": "https://example.com/image.png"
+    }
+  },
+  {
+    "id": "2",
+    "title": "lablab",
+    "description": "not a test",
+    "price": 4999,
+    "isAvailable": false,
+    "categories": ["prim"],
+    "images": {
+      "preview": "https://example.com/image.png"
+    }
+  }
+]

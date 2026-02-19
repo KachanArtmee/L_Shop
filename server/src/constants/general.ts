@@ -1,3 +1,5 @@
+import path from "node:path";
+
 export const COOKIE_CONF = {
     name: "myShopToken",
     maxAge: 1000 * 60 * 10,
@@ -7,8 +9,8 @@ export const COOKIE_CONF = {
 };
 
 export const DB_PATH = {
-    users: './database/users.json',
-    products: './database/products.json',
-    deliveries: './database/deliveries.json',
-    carts: './database/carts.json',
-}
+    users: path.join(process.cwd(), 'database', 'users.json'),
+    products: path.join(process.cwd(), 'database', 'products.json'),
+    deliveries: path.join(process.cwd(), 'database', 'deliveries.json'),
+    carts: path.join(process.cwd(), 'database', 'carts.json'),
+};

@@ -6,7 +6,8 @@ import { UserCart, UserDelivery } from "../models/product.model";
 export class UserService {
     static register(user: UserModel) {
         try {
-            const fileData = fs.readFileSync(DB_PATH.users, 'utf-8');
+            let fileData = fs.readFileSync(DB_PATH.users, 'utf-8');
+            fileData = fileData.replace(/^\uFEFF/, '');
             const users: UserModel[] = JSON.parse(fileData || '[]');
 
             const userEx = users.find(u => u.email === user.email);
@@ -40,7 +41,8 @@ export class UserService {
 
     static login(email: string, password: string) {
         try {
-            const fileData = fs.readFileSync(DB_PATH.users, 'utf-8');
+            let fileData = fs.readFileSync(DB_PATH.users, 'utf-8');
+            fileData = fileData.replace(/^\uFEFF/, '');
             const users: UserModel[] = JSON.parse(fileData || '[]');
 
             const user = users.find(u => u.email === email);
@@ -67,9 +69,17 @@ export class UserService {
 
     static getUser(id: string) {
         try {
-            const users: UserModel[] = JSON.parse(fs.readFileSync(DB_PATH.users, 'utf-8') || '[]');
-            const carts: UserCart[] = JSON.parse(fs.readFileSync(DB_PATH.carts, 'utf-8') || '[]');
-            const deliveries: UserDelivery[] = JSON.parse(fs.readFileSync(DB_PATH.deliveries, 'utf-8') || '[]');
+            let usersData = fs.readFileSync(DB_PATH.users, 'utf-8');
+            usersData = usersData.replace(/^\uFEFF/, '');
+            const users: UserModel[] = JSON.parse(usersData || '[]');
+
+            let cartsData = fs.readFileSync(DB_PATH.carts, 'utf-8');
+            cartsData = cartsData.replace(/^\uFEFF/, '');
+            const carts: UserCart[] = JSON.parse(cartsData || '[]');
+
+            let deliveriesData = fs.readFileSync(DB_PATH.deliveries, 'utf-8');
+            deliveriesData = deliveriesData.replace(/^\uFEFF/, '');
+            const deliveries: UserDelivery[] = JSON.parse(deliveriesData || '[]');
 
             const user = users.find(u => String(u.id) === String(id));
 
