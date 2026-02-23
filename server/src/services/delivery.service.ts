@@ -1,26 +1,27 @@
 import fs from 'fs';
 import { DB_PATH } from "../constants/general";
 import { CartService } from "./cart.service";
-import { UserDelivery, Basket } from "../models/product.model";
+import { Basket } from "../models/product.model";
+import { Order, OrderRequest } from "../models/delivery.model";
 
 export class DeliveryService {
-    static getDeliveries(): any[] {
+    static getDeliveries(): Order[] {
         try {
             if (!fs.existsSync(DB_PATH.deliveries)) return [];
             let data = fs.readFileSync(DB_PATH.deliveries, "utf8");
             data = data.replace(/^\uFEFF/, '');
-            return JSON.parse(data || '[]');
+            return JSON.parse(data || '[]') as Order[];
         } catch {
             return [];
         }
     }
 
-    static getByUserId(userId: string | number): any[] {
+    static getByUserId(userId: string | number): Order[] {
         const allDeliveries = this.getDeliveries();
         return allDeliveries.filter(d => String(d.userId) === String(userId));
     }
 
-    static createOrder(userId: string | number, orderData: { address: any, phone: string, email: string }) {
+    static createOrder(userId: string | number, orderData: OrderRequest): Order {
         const carts = CartService.getCarts();
         const userCart = carts.find(c => String(c.userId) === String(userId));
 
@@ -30,10 +31,12 @@ export class DeliveryService {
 
         const deliveries = this.getDeliveries();
 
-        const newOrder = {
+        const newOrder: Order = {
             id: Date.now(),
             userId,
-            ...orderData,
+            address: orderData.address,
+            phone: orderData.phone,
+            email: orderData.email,
             items: userCart.basket.map(item => ({
                 productId: item.products.id,
                 title: item.products.title,

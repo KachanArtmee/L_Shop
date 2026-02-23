@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { DeliveryService } from "../services/delivery.service";
+import { OrderRequest } from "../models/delivery.model";
 
 export class DeliveryController {
     static getUserDeliveries(req: Request, res: Response) {
@@ -22,10 +23,14 @@ export class DeliveryController {
     static checkout(req: Request, res: Response) {
         try {
             const userId = res.locals.userId;
-            const { address, phone, email } = req.body;
+            const { address, phone, email, captcha } = req.body as OrderRequest;
 
             if (!address || !phone || !email || !email.includes('@')) {
                 return res.status(400).json({ success: false, message: "Fill all fields correctly" });
+            }
+
+            if (captcha !== undefined && Number(captcha) !== 4) {
+                return res.status(400).json({ success: false, message: "Invalid captcha" });
             }
 
             const order = DeliveryService.createOrder(userId, { address, phone, email });

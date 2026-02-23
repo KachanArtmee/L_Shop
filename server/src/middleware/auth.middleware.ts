@@ -7,7 +7,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     if (!userId || Array.isArray(userId)) {
         return res.status(401).json({
             success: false,
-            message: "Ошибка доступа: Корзина и доставка только для зарегистрированных пользователей! 🔫"
+            message: "Ошибка доступа: Регайся и вали "
         });
     }
 
