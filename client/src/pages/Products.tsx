@@ -3,6 +3,28 @@ import { productsAPI, cartAPI } from '../api';
 import { useAuth } from '../AuthContext';
 import { Product } from '../types';
 import { Container, Row, Col, Card, Button, Spinner, Alert, Badge } from 'react-bootstrap';
+import { Cart } from 'react-bootstrap-icons';
+
+const getProductImage = (product: Product) => {
+  const category = product.categories?.[0]?.toLowerCase() || '';
+  
+  const images: { [key: string]: string } = {
+    'процессоры': 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=300',
+    'видеокарты': 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=300',
+    'ssd': 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=300',
+    'оперативная память': 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300',
+    'материнские платы': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=300',
+    'блоки питания': 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=300',
+  };
+
+  for (const [cat, url] of Object.entries(images)) {
+    if (category.includes(cat)) {
+      return url;
+    }
+  }
+  
+  return `https://via.placeholder.com/300x200/6c5ce7/ffffff?text=${encodeURIComponent(product.title)}`;
+};
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -36,7 +58,6 @@ export default function Products() {
     try {
       await cartAPI.add(product.id, 1);
       
-      // Сохраняем в localStorage для простоты
       const cart = JSON.parse(localStorage.getItem(`cart_${user.id}`) || '[]');
       const existing = cart.find((i: any) => i.productId === product.id);
       
@@ -83,11 +104,14 @@ export default function Products() {
       <Row xs={1} md={2} lg={3} xl={4} className="g-4">
         {products.map(product => (
           <Col key={product.id}>
-            <Card className="h-100 shadow-sm hover-shadow">
+            <Card className="h-100 shadow-sm">
               <Card.Img 
                 variant="top" 
-                src={product.images?.preview || 'https://via.placeholder.com/300x200?text=PC+Shop'} 
+                src={getProductImage(product)}
                 style={{ height: '200px', objectFit: 'cover' }}
+                onError={(e: any) => {
+                  e.target.src = `https://via.placeholder.com/300x200/6c5ce7/ffffff?text=${encodeURIComponent(product.title)}`;
+                }}
               />
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
@@ -106,19 +130,25 @@ export default function Products() {
                   </Badge>
                 </div>
               </Card.Body>
-              <Card.Footer className="bg-white">
+              <Card.Footer className="bg-white border-0 pt-0">
                 <Button 
                   variant={product.isAvailable ? 'primary' : 'secondary'}
-                  className="w-100"
+                  className="w-100 rounded-pill py-2"
                   disabled={!product.isAvailable || addingId === product.id}
                   onClick={() => addToCart(product)}
+                  style={{
+                    background: product.isAvailable ? 'linear-gradient(135deg, #6c5ce7, #00cec9)' : '',
+                    border: 'none'
+                  }}
                 >
                   {addingId === product.id ? (
                     <>
                       <Spinner as="span" animation="border" size="sm" /> Добавление...
                     </>
                   ) : (
-                    'В корзину'
+                    <>
+                      <Cart className="me-2" /> В корзину
+                    </>
                   )}
                 </Button>
               </Card.Footer>
