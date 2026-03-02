@@ -112,7 +112,7 @@ export default function Home() {
   ];
 
   const features = [
-    { icon: <Truck size={30} />, title: 'Быстрая доставка', text: 'По всей России за 1-3 дня' },
+    { icon: <Truck size={30} />, title: 'Быстрая доставка', text: 'По всей Беларуси за 1-3 дня' },
     { icon: <Shield size={30} />, title: 'Гарантия 2 года', text: 'Официальная гарантия' },
     { icon: <CreditCard size={30} />, title: 'Удобная оплата', text: 'Карты, рассрочка, бонусы' },
     { icon: <Star size={30} />, title: 'Топ бренды', text: 'Только оригинальная продукция' },
@@ -316,158 +316,164 @@ export default function Home() {
       </Container>
 
       {/* Второе видео на всю ширину + фото поверх */}
-      <div 
-        style={{ 
-          height: '80vh', 
-          minHeight: '600px',
-          width: '100%',
-          position: 'relative',
-          backgroundColor: '#1a1a1a',
-          overflow: 'hidden',
-          marginBottom: '100px'  // <--- ДОБАВЬТЕ ЭТУ СТРОКУ
-        }}
-      >
-        {/* Второе видео */}
-        {!video2Error ? (
-          <video
-            ref={video2Ref}
-            autoPlay
-            loop
-            playsInline
-            muted={isVideo2Muted}
-            onLoadedData={handleVideo2Loaded}
-            onError={handleVideo2Error}
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              minWidth: '100%',
-              minHeight: '100%',
-              width: 'auto',
-              height: 'auto',
-              objectFit: 'cover',
-              zIndex: 0
-            }}
-          >
-            <source src="/video/second-video.mp4" type="video/mp4" />
-          </video>
-        ) : (
-          <div 
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(135deg, #6c5ce7, #00cec9)',
-              zIndex: 0
-            }}
-          />
-        )}
+<div 
+  style={{ 
+    height: '80vh', 
+    minHeight: '600px',
+    width: '100%',
+    position: 'relative',
+    backgroundColor: '#000000', // Черный фон для полос по бокам
+    overflow: 'hidden',
+    marginBottom: '120px'
+  }}
+>
+  {/* Второе видео */}
+  {!video2Error ? (
+    <video
+      ref={video2Ref}
+      autoPlay
+      loop
+      playsInline
+      muted={isVideo2Muted}
+      onLoadedData={handleVideo2Loaded}
+      onError={handleVideo2Error}
+      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        height: '100%',        // видео занимает 100% высоты контейнера
+        width: 'auto',          // ширина автоматически подстраивается под высоту
+        objectFit: 'contain',   // сохраняет пропорции, добавляет черные полосы по бокам
+        zIndex: 0
+      }}
+    >
+      <source src="/video/second-video.mp4" type="video/mp4" />
+    </video>
+  ) : (
+    <div 
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'linear-gradient(135deg, #6c5ce7, #00cec9)',
+        zIndex: 0
+      }}
+    />
+  )}
 
-        {/* Затемняющий оверлей */}
-        <div 
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(0,0,0,0.3)',
-            zIndex: 1,
-            pointerEvents: 'none'
-          }}
-        />
+  {/* Затемняющий оверлей */}
+  <div 
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: 'rgba(0,0,0,0.3)',
+      zIndex: 1,
+      pointerEvents: 'none'
+    }}
+  />
 
-        {/* Индикатор загрузки второго видео */}
-        {video2Loading && !video2Error && (
-          <div 
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 2,
-              color: 'white'
-            }}
-          >
-            <Spinner animation="border" variant="light" />
-            <p className="mt-2">Загрузка видео...</p>
-          </div>
-        )}
+  {/* Индикатор загрузки второго видео */}
+  {video2Loading && !video2Error && (
+    <div 
+      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 2,
+        color: 'white'
+      }}
+    >
+      <Spinner animation="border" variant="light" />
+      <p className="mt-2">Загрузка видео...</p>
+    </div>
+  )}
 
-        
+  {/* Кнопка управления звуком */}
+  <Button
+    onClick={toggleVideo2Mute}
+    style={{
+      position: 'absolute',
+      bottom: '30px',
+      right: '30px',
+      zIndex: 3,
+      width: '50px',
+      height: '50px',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'rgba(0,0,0,0.5)',
+      border: '1px solid rgba(255,255,255,0.3)',
+      color: 'white',
+      fontSize: '24px',
+      cursor: 'pointer',
+      padding: 0
+    }}
+  >
+    {isVideo2Muted ? <VolumeMute size={24} /> : <VolumeUp size={24} />}
+  </Button>
 
-        {/* Кнопка управления звуком */}
-        <Button
-          onClick={toggleVideo2Mute}
-          style={{
-            position: 'absolute',
-            bottom: '30px',
-            right: '30px',
-            zIndex: 3,
-            width: '50px',
-            height: '50px',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'rgba(0,0,0,0.5)',
-            border: '1px solid rgba(255,255,255,0.3)',
-            color: 'white',
-            fontSize: '24px',
-            cursor: 'pointer',
-            padding: 0
-          }}
-        >
-          {isVideo2Muted ? <VolumeMute size={24} /> : <VolumeUp size={24} />}
-        </Button>
-
-        {/* Фото поверх видео */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '70%',
-            right: '5%',
-            transform: 'translateY(-50%)',
-            width: '20%',
-            minWidth: '200px',
-            maxWidth: '300px',
-            zIndex: 2,
-            borderRadius: '15px',
-            overflow: 'hidden',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
-            border: '3px solid rgba(255,255,255,0.2)'
-          }}
-        >
-          <img 
-            src="/images/your-photo.jpg" 
-            alt="Your photo"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block'
-            }}
-          />
-          
-          {/* Подпись к фото */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              color: 'black',
-              padding: '20px 10px 10px',
-              textAlign: 'center',
-              fontSize: '14px'
-            }}
-          >
-            SSD диск Samsung 990 Pro 1TB
-          </div>
-        </div>
-      </div>
+  {/* Фото поверх видео - кликабельное */}
+<div
+  onClick={() => navigate('/products')} // Добавлен переход в каталог
+  style={{
+    position: 'absolute',
+    top: '50%',
+    right: '1%',
+    transform: 'translateY(-50%)',
+    width: '20%',
+    minWidth: '200px',
+    maxWidth: '300px',
+    zIndex: 2,
+    borderRadius: '15px',
+    overflow: 'hidden',
+    boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+    border: '3px solid rgba(255,255,255,0.2)',
+    cursor: 'pointer', // Добавлен указатель курсора
+    transition: 'transform 0.3s ease', // Плавная анимация
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = 'translateY(-50%) scale(1.05)'; // Увеличение при наведении
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = 'translateY(-50%) scale(1)'; // Возврат к исходному размеру
+  }}
+>
+  <img 
+    src="/images/your-photo.jpg" 
+    alt="Your photo"
+    style={{
+      width: '100%',
+      height: 'auto',
+      display: 'block'
+    }}
+  />
+  
+  {/* Подпись к фото */}
+  <div
+    style={{
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      
+      color: 'black',
+      padding: '20px 10px 10px',
+      textAlign: 'center',
+      fontSize: '14px'
+    }}
+  >
+      SSD диск Samsung 990 Pro 1TB
+    </div>
+  </div>
+</div>
 
       {/* Преимущества */}
       <div style={{ background: 'linear-gradient(135deg, #6c5ce7, #00cec9)' }} className="py-5 text-white">
