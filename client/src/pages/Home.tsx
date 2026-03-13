@@ -17,7 +17,6 @@ export default function Home() {
   // Состояния звука для обоих видео
   const [isVideo1Muted, setIsVideo1Muted] = useState(true);
   const [isVideo2Muted, setIsVideo2Muted] = useState(true);
-  const [isVideo2Playing, setIsVideo2Playing] = useState(false);
 
   useEffect(() => {
     // Настройка первого видео
@@ -40,7 +39,7 @@ export default function Home() {
         console.log('Автовоспроизведение второго видео заблокировано:', error);
       });
     }
-  }, []);
+  }, [isVideo1Muted, isVideo2Muted]);
 
   const toggleVideo1Mute = () => {
     if (video1Ref.current && video2Ref.current) {
@@ -67,18 +66,6 @@ export default function Home() {
       
       video2Ref.current.muted = newMutedState;
       setIsVideo2Muted(newMutedState);
-    }
-  };
-
-  const toggleVideo2Play = () => {
-    if (video2Ref.current) {
-      if (video2Ref.current.paused) {
-        video2Ref.current.play();
-        setIsVideo2Playing(true);
-      } else {
-        video2Ref.current.pause();
-        setIsVideo2Playing(false);
-      }
     }
   };
 
@@ -448,7 +435,7 @@ export default function Home() {
 >
   <img 
     src="/images/your-photo.jpg" 
-    alt="Your photo"
+    alt="SSD Samsung 990 Pro 1TB"
     style={{
       width: '100%',
       height: 'auto',

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import { Container, Table, Button, Card, Alert } from 'react-bootstrap';
@@ -16,18 +16,23 @@ export default function Cart() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  const loadCart = useCallback(() => {
+    if (!user) {
+      setItems([]);
+      return;
+    }
+
+    const saved = localStorage.getItem(`cart_${user.id}`);
+    setItems(saved ? JSON.parse(saved) : []);
+  }, [user]);
+
   useEffect(() => {
     if (!user) {
       navigate('/login');
       return;
     }
     loadCart();
-  }, [user]);
-
-  const loadCart = () => {
-    const saved = localStorage.getItem(`cart_${user?.id}`);
-    setItems(saved ? JSON.parse(saved) : []);
-  };
+  }, [user, navigate, loadCart]);
 
   const updateQuantity = async (productId: string | number, newQuantity: number) => {
     if (newQuantity < 1) return;

@@ -1,26 +1,29 @@
 import axios from 'axios';
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const api = axios.create({
-  baseURL: 'http://localhost:3000',  // прямой URL
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3000',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-  }
+  },
 });
 
-// Для отладки - добавляем перехватчик
-api.interceptors.request.use(request => {
-  console.log('Starting Request:', request.url);
-  return request;
-});
+if (isDevelopment) {
+  api.interceptors.request.use((request) => {
+    console.log('API Request:', request.method?.toUpperCase(), request.url);
+    return request;
+  });
 
-api.interceptors.response.use(
-  response => response,
-  error => {
-    console.error('Response Error:', error.config?.url, error.response?.status);
-    return Promise.reject(error);
-  }
-);
+  api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      console.error('API Error:', error.config?.url, error.response?.status);
+      return Promise.reject(error);
+    }
+  );
+}
 
 export const authAPI = {
   register: (data: any) => api.post('/auth/register', data),
@@ -30,17 +33,16 @@ export const authAPI = {
 };
 
 export const productsAPI = {
-  // ВАЖНО: используем '/product' (без s), как в бэкенде
-  getAll: (params?: any) => api.get('/product', { params }),
+  getAll: (params?: Record<string, string | number | boolean>) =>
+    api.get('/product', { params }),
 };
 
 export const cartAPI = {
-  add: (productId: string | number, quantity: number) => 
+  add: (productId: string | number, quantity: number) =>
     api.post('/cart/add', { productId, quantity }),
-  updateQuantity: (productId: string | number, quantity: number) => 
+  updateQuantity: (productId: string | number, quantity: number) =>
     api.patch('/cart/quantity', { productId, quantity }),
-  remove: (productId: string | number) => 
-    api.delete(`/cart/${productId}`),
+  remove: (productId: string | number) => api.delete(`/cart/${productId}`),
 };
 
 export const deliveryAPI = {
