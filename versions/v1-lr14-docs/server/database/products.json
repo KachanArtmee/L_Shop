@@ -1,0 +1,210 @@
+[
+  {
+    "id": "cpu-1",
+    "title": "AMD Ryzen 5 7600",
+    "description": "6 ядер / 12 потоков, отличная производительность для игр и повседневной работы.",
+    "price": 18990,
+    "isAvailable": true,
+    "categories": [
+      "Процессоры"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "cpu-2",
+    "title": "AMD Ryzen 7 7800X3D",
+    "description": "Игровой флагман с 3D V-Cache для максимального FPS в современных проектах.",
+    "price": 39990,
+    "isAvailable": true,
+    "categories": [
+      "Процессоры"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "cpu-3",
+    "title": "Intel Core i5-14600KF",
+    "description": "Производительный процессор для игровых и рабочих сборок среднего и высокого уровня.",
+    "price": 28990,
+    "isAvailable": true,
+    "categories": [
+      "Процессоры"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "cpu-4",
+    "title": "Intel Core i7-14700K",
+    "description": "Мощный процессор для стриминга, монтажа и тяжелых многопоточных задач.",
+    "price": 46990,
+    "isAvailable": true,
+    "categories": [
+      "Процессоры"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "gpu-1",
+    "title": "NVIDIA GeForce RTX 4060 8GB",
+    "description": "Энергоэффективная видеокарта для Full HD-гейминга и работы с контентом.",
+    "price": 35990,
+    "isAvailable": true,
+    "categories": [
+      "Видеокарты"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "gpu-2",
+    "title": "NVIDIA GeForce RTX 4070 SUPER 12GB",
+    "description": "Высокая производительность в 1440p, трассировка лучей и DLSS для комфортной игры.",
+    "price": 72990,
+    "isAvailable": true,
+    "categories": [
+      "Видеокарты"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1624705002806-5d72df19c3c8?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "gpu-3",
+    "title": "AMD Radeon RX 7700 XT 12GB",
+    "description": "Отличный баланс цены и производительности для современных AAA-игр.",
+    "price": 61990,
+    "isAvailable": true,
+    "categories": [
+      "Видеокарты"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1612198084033-aade902d1aae?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "gpu-4",
+    "title": "AMD Radeon RX 7800 XT 16GB",
+    "description": "Мощная видеокарта с большим видеобуфером для игр в 1440p и 4K.",
+    "price": 76990,
+    "isAvailable": false,
+    "categories": [
+      "Видеокарты"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "ram-1",
+    "title": "Kingston FURY Beast 32GB DDR5-6000",
+    "description": "Набор 2x16GB, оптимален для современных игровых и рабочих систем.",
+    "price": 13990,
+    "isAvailable": true,
+    "categories": [
+      "Оперативная память"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1562976540-1502c2145186?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "ram-2",
+    "title": "Corsair Vengeance 32GB DDR5-5600",
+    "description": "Надежная память с хорошими таймингами для стабильной работы под нагрузкой.",
+    "price": 14990,
+    "isAvailable": true,
+    "categories": [
+      "Оперативная память"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "ram-3",
+    "title": "G.Skill Ripjaws S5 32GB DDR5-6000",
+    "description": "Быстрая память с низким профилем радиаторов для компактных систем.",
+    "price": 15990,
+    "isAvailable": true,
+    "categories": [
+      "Оперативная память"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "ram-4",
+    "title": "Patriot Viper Steel 16GB DDR4-3600",
+    "description": "Доступный и проверенный комплект для сборок на платформе DDR4.",
+    "price": 7490,
+    "isAvailable": true,
+    "categories": [
+      "Оперативная память"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1541029071515-84cc54f84dc5?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "ssd-1",
+    "title": "Samsung 990 PRO 1TB",
+    "description": "Премиальный NVMe SSD PCIe 4.0 с высокой скоростью чтения и записи.",
+    "price": 13990,
+    "isAvailable": true,
+    "categories": [
+      "SSD"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "ssd-2",
+    "title": "WD Black SN850X 1TB",
+    "description": "Игровой NVMe-накопитель с отличной стабильностью и быстрым откликом.",
+    "price": 12490,
+    "isAvailable": true,
+    "categories": [
+      "SSD"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1628557044797-f21a177c37ec?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "ssd-3",
+    "title": "Kingston KC3000 2TB",
+    "description": "Быстрый SSD большого объема для игр, проектов и рабочих данных.",
+    "price": 18990,
+    "isAvailable": true,
+    "categories": [
+      "SSD"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800&q=80&auto=format&fit=crop"
+    }
+  },
+  {
+    "id": "ssd-4",
+    "title": "Crucial P3 Plus 1TB",
+    "description": "Универсальный NVMe SSD для повседневных задач и игровых сборок.",
+    "price": 8990,
+    "isAvailable": true,
+    "categories": [
+      "SSD"
+    ],
+    "images": {
+      "preview": "https://images.unsplash.com/photo-1562813733-b31f71025d54?w=800&q=80&auto=format&fit=crop"
+    }
+  }
+]
