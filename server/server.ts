@@ -1,29 +1,7 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import authRouter from './src/router/auth.router';
-import productRouter from './src/router/product.router';
-import cartRouter from './src/router/cart.router';
-import deliveryRouter from './src/router/delivery.router';
-import { authMiddleware } from './src/middleware/auth.middleware';
+import app from './src/app';
 
-const app = express();
-const PORT = 3000;
-
-app.use(cors({
-    origin: 'http://localhost:3001',
-    credentials: true
-}));
-
-app.use(express.json());
-app.use(cookieParser());
-
-app.use('/auth', authRouter);
-app.use('/product', productRouter);
-
-app.use('/cart', authMiddleware, cartRouter);
-app.use('/delivery', authMiddleware, deliveryRouter);
+const PORT = Number(process.env.PORT || 3000);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
-})
+});
