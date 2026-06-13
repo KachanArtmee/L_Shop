@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Container, Form, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../AuthContext';
-import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
+import { useLocale } from '../LocaleContext';
+import AppButton from '../components/AppButton';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -11,6 +13,7 @@ export default function Register() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
+  const { t } = useLocale();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -18,7 +21,8 @@ export default function Register() {
     setError('');
 
     if (password !== confirmPassword) {
-      return setError('Пароли не совпадают');
+      setError(t('register.passwordMismatch'));
+      return;
     }
 
     setLoading(true);
@@ -27,23 +31,23 @@ export default function Register() {
       await register(name, email, password);
       navigate('/');
     } catch (err: any) {
-      setError(err.message || 'Ошибка регистрации');
+      setError(err.message || t('common.error'));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Container className="mt-5" style={{ maxWidth: '400px' }}>
+    <Container className="mt-5" style={{ maxWidth: 420 }}>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Регистрация</h2>
-          
+          <h1 className="h2 text-center mb-4">{t('register.title')}</h1>
+
           {error && <Alert variant="danger">{error}</Alert>}
-          
+
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Имя</Form.Label>
+              <Form.Label>{t('register.name')}</Form.Label>
               <Form.Control
                 type="text"
                 value={name}
@@ -63,7 +67,7 @@ export default function Register() {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Пароль</Form.Label>
+              <Form.Label>{t('register.password')}</Form.Label>
               <Form.Control
                 type="password"
                 value={password}
@@ -74,7 +78,7 @@ export default function Register() {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Подтверждение пароля</Form.Label>
+              <Form.Label>{t('register.confirmPassword')}</Form.Label>
               <Form.Control
                 type="password"
                 value={confirmPassword}
@@ -84,18 +88,13 @@ export default function Register() {
               />
             </Form.Group>
 
-            <Button 
-              type="submit" 
-              variant="primary" 
-              className="w-100"
-              disabled={loading}
-            >
-              {loading ? 'Регистрация...' : 'Зарегистрироваться'}
-            </Button>
+            <AppButton type="submit" className="w-100" disabled={loading}>
+              {loading ? t('register.loading') : t('register.submit')}
+            </AppButton>
           </Form>
 
           <div className="text-center mt-3">
-            Уже есть аккаунт? <Link to="/login">Войти</Link>
+            {t('register.hasAccount')} <Link to="/login">{t('register.login')}</Link>
           </div>
         </Card.Body>
       </Card>

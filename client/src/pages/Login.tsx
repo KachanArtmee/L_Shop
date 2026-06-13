@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Container, Form, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../AuthContext';
-import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
+import { useLocale } from '../LocaleContext';
+import AppButton from '../components/AppButton';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -9,6 +11,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const { t } = useLocale();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,20 +23,20 @@ export default function Login() {
       await login(email, password);
       navigate('/');
     } catch (err: any) {
-      setError(err.message || 'Ошибка входа');
+      setError(err.message || t('common.error'));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Container className="mt-5" style={{ maxWidth: '400px' }}>
+    <Container className="mt-5" style={{ maxWidth: 420 }}>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Вход</h2>
-          
+          <h1 className="h2 text-center mb-4">{t('login.title')}</h1>
+
           {error && <Alert variant="danger">{error}</Alert>}
-          
+
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
@@ -46,7 +49,7 @@ export default function Login() {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Пароль</Form.Label>
+              <Form.Label>{t('login.password')}</Form.Label>
               <Form.Control
                 type="password"
                 value={password}
@@ -55,18 +58,13 @@ export default function Login() {
               />
             </Form.Group>
 
-            <Button 
-              type="submit" 
-              variant="primary" 
-              className="w-100"
-              disabled={loading}
-            >
-              {loading ? 'Вход...' : 'Войти'}
-            </Button>
+            <AppButton type="submit" className="w-100" disabled={loading}>
+              {loading ? t('login.loading') : t('login.submit')}
+            </AppButton>
           </Form>
 
           <div className="text-center mt-3">
-            Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+            {t('login.noAccount')} <Link to="/register">{t('login.register')}</Link>
           </div>
         </Card.Body>
       </Card>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { CheckoutRequest, LocaleCode, ProductFormData } from './types';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -26,8 +27,8 @@ if (isDevelopment) {
 }
 
 export const authAPI = {
-  register: (data: any) => api.post('/auth/register', data),
-  login: (data: any) => api.post('/auth/login', data),
+  register: (data: { name: string; email: string; password: string }) => api.post('/auth/register', data),
+  login: (data: { email: string; password: string }) => api.post('/auth/login', data),
   logout: () => api.post('/auth/logout'),
   getUser: () => api.get('/auth/getUser'),
 };
@@ -35,6 +36,11 @@ export const authAPI = {
 export const productsAPI = {
   getAll: (params?: Record<string, string | number | boolean>) =>
     api.get('/product', { params }),
+  create: (data: ProductFormData) => api.post('/product', data),
+  update: (productId: string | number, data: ProductFormData) => api.put(`/product/${productId}`, data),
+  like: (productId: string | number) => api.post(`/product/${productId}/like`),
+  review: (productId: string | number, data: { rating: number; comment: string }) =>
+    api.post(`/product/${productId}/reviews`, data),
 };
 
 export const cartAPI = {
@@ -46,5 +52,13 @@ export const cartAPI = {
 };
 
 export const deliveryAPI = {
-  checkout: (data: any) => api.post('/delivery/checkout', data),
+  checkout: (data: CheckoutRequest) => api.post('/delivery/checkout', data),
 };
+
+export const sessionAPI = {
+  getLocale: () => api.get<{ success: boolean; locale: LocaleCode | null; suggestedLocale: LocaleCode }>('/locale'),
+  setLocale: (locale: LocaleCode) => api.post('/locale', { locale }),
+  clearLocale: () => api.delete('/locale'),
+};
+
+export default api;

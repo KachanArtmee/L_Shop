@@ -1,5 +1,13 @@
 import {UserCart} from "./product.model";
 
+export type UserRole = "user" | "admin" | "manager";
+
+export interface RecommendationTag {
+    tag: string;
+    weight: number;
+    lastUsedAt: string;
+}
+
 export interface UserModel {
     id: number | string;
     name: string;
@@ -7,7 +15,11 @@ export interface UserModel {
     email: string;
     phone?: string;
     login?: string;
+    role?: UserRole;
+    recommendations?: RecommendationTag[];
 }
+
+export type SafeUser = Omit<UserModel, 'password'>;
 
 export interface AuthRequest {
     login?: string;
@@ -15,11 +27,13 @@ export interface AuthRequest {
     phone?: string;
     name?: string;
     password: string;
+    role?: UserRole;
+    adminKey?: string;
 }
 
 export interface AuthResponse {
     success: boolean;
     message: string;
-    user?: Omit<UserModel, 'password'>;
+    user?: SafeUser;
     cart?: UserCart;
 }

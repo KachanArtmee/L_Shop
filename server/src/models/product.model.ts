@@ -5,6 +5,23 @@ export type Address = {
     houseNumber?: string;
 };
 
+export type LocaleCode = "ru" | "en";
+
+export interface ProductTranslation {
+    title?: string;
+    description?: string;
+    categories?: string[];
+}
+
+export interface ProductReview {
+    id: number | string;
+    userId: number | string;
+    userName: string;
+    rating: number;
+    comment: string;
+    createdAt: string;
+}
+
 export interface Product {
     id: number | string;
     title: string;
@@ -12,6 +29,11 @@ export interface Product {
     isAvailable: boolean;
     description: string;
     categories: string[];
+    tags?: string[];
+    translations?: Partial<Record<LocaleCode, ProductTranslation>>;
+    reviews?: ProductReview[];
+    averageRating?: number;
+    isRecommended?: boolean;
     images: {
         preview: string;
         gallery?: string[];

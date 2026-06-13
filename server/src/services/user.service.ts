@@ -1,65 +1,120 @@
-import { UserModel } from '../models/user.model';
-import fs from 'fs';
 import { DB_PATH } from "../constants/general";
 import { UserCart, UserDelivery } from "../models/product.model";
+import { AuthRequest, RecommendationTag, SafeUser, UserModel, UserRole } from "../models/user.model";
+import { readJsonFile, writeJsonFile } from "../utils/file-db";
+import { getActiveRecommendationTags, mergeRecommendationTags } from "../utils/recommendations";
 
 export class UserService {
-    static register(user: UserModel) {
-        try {
-            let fileData = fs.readFileSync(DB_PATH.users, 'utf-8');
-            fileData = fileData.replace(/^\uFEFF/, '');
-            const users: UserModel[] = JSON.parse(fileData || '[]');
+    /**
+     * Loads all registered users from the JSON storage.
+     *
+     * @returns User records, including private fields for server-only checks.
+     */
+    static getUsers(): UserModel[] {
+        return readJsonFile<UserModel[]>(DB_PATH.users, []);
+    }
 
-            const userEx = users.find(u => u.email === user.email);
+    /**
+     * Persists all registered users in JSON storage.
+     *
+     * @param users Full user collection.
+     */
+    static saveUsers(users: UserModel[]): void {
+        writeJsonFile(DB_PATH.users, users);
+    }
+
+    /**
+     * Removes the password from a user before returning it to the client.
+     *
+     * @param user Internal user record.
+     * @returns Public user payload.
+     */
+    static toSafeUser(user: UserModel): SafeUser {
+        const { password, ...userWithoutPassword } = user;
+        return {
+            ...userWithoutPassword,
+            role: user.role || "user",
+            recommendations: user.recommendations || [],
+        };
+    }
+
+    /**
+     * Registers a regular user. Admin registration requires an explicit admin key.
+     *
+     * @param request Registration payload.
+     * @returns Auth result with a token-compatible user id.
+     */
+    static register(request: AuthRequest) {
+        try {
+            const users = this.getUsers();
+            const userEx = users.find(u => u.email === request.email);
+
             if (userEx) {
                 return {
                     success: false,
-                    message: 'Такой пользователь есть'
+                    message: "Такой пользователь уже существует"
                 };
             }
 
+            const requestedRole = request.role || "user";
+            const role: UserRole =
+                requestedRole === "admin" && request.adminKey === (process.env.ADMIN_REGISTER_KEY || "owner-demo-key")
+                    ? "admin"
+                    : "user";
+
             const newUser: UserModel = {
-                ...user,
-                id: Date.now()
+                id: Date.now(),
+                name: request.name || request.login || request.email || "Пользователь",
+                email: request.email || "",
+                login: request.login,
+                phone: request.phone,
+                password: request.password,
+                role,
+                recommendations: [],
             };
+
             users.push(newUser);
-
-            fs.writeFileSync(DB_PATH.users, JSON.stringify(users, null, 2), 'utf-8');
-
-            const { password, ...userWithoutPassword } = newUser;
+            this.saveUsers(users);
 
             return {
                 success: true,
-                message: 'Cool',
+                message: "Регистрация успешна",
                 token: String(newUser.id),
-                user: userWithoutPassword
+                user: this.toSafeUser(newUser)
             };
         } catch (error) {
-            return { success: false };
+            return { success: false, message: "Ошибка регистрации" };
         }
     }
 
-    static login(email: string, password: string) {
+    /**
+     * Authenticates a user by email, login, or phone.
+     *
+     * @param identifier Email, login, or phone.
+     * @param password Plain password from the educational JSON storage.
+     * @returns Auth result with a token-compatible user id.
+     */
+    static login(identifier: string, password: string) {
         try {
-            let fileData = fs.readFileSync(DB_PATH.users, 'utf-8');
-            fileData = fileData.replace(/^\uFEFF/, '');
-            const users: UserModel[] = JSON.parse(fileData || '[]');
+            const users = this.getUsers();
+            const user = users.find(u =>
+                u.email === identifier ||
+                u.login === identifier ||
+                u.phone === identifier
+            );
 
-            const user = users.find(u => u.email === email);
             if (!user || user.password !== password) {
-                return { success: false, message: 'Ошибка входа' };
+                return { success: false, message: "Неверный логин или пароль" };
             }
-
-            const { password: userPw, ...userWithoutPassword } = user;
 
             return {
                 success: true,
-                message: 'Вход был',
+                message: "Вход выполнен",
                 token: String(user.id),
-                user: userWithoutPassword
+                user: this.toSafeUser(user)
             };
         } catch {
-            return { success: false };
+            return { success: false, message: "Ошибка входа" };
         }
     }
 
@@ -67,39 +122,80 @@ export class UserService {
         return { success: true };
     }
 
+    /**
+     * Finds a user by id without removing private fields.
+     *
+     * @param id User id from cookie/session.
+     * @returns User record or undefined.
+     */
+    static getUserRecord(id: string | number): UserModel | undefined {
+        return this.getUsers().find(u => String(u.id) === String(id));
+    }
+
+    /**
+     * Returns public profile plus cart and delivery information.
+     *
+     * @param id User id from cookie/session.
+     * @returns User profile response.
+     */
     static getUser(id: string) {
         try {
-            let usersData = fs.readFileSync(DB_PATH.users, 'utf-8');
-            usersData = usersData.replace(/^\uFEFF/, '');
-            const users: UserModel[] = JSON.parse(usersData || '[]');
-
-            let cartsData = fs.readFileSync(DB_PATH.carts, 'utf-8');
-            cartsData = cartsData.replace(/^\uFEFF/, '');
-            const carts: UserCart[] = JSON.parse(cartsData || '[]');
-
-            let deliveriesData = fs.readFileSync(DB_PATH.deliveries, 'utf-8');
-            deliveriesData = deliveriesData.replace(/^\uFEFF/, '');
-            const deliveries: UserDelivery[] = JSON.parse(deliveriesData || '[]');
-
-            const user = users.find(u => String(u.id) === String(id));
+            const user = this.getUserRecord(id);
 
             if (!user) {
-                return { success: false };
+                return { success: false, message: "Пользователь не найден" };
             }
 
+            const carts = readJsonFile<UserCart[]>(DB_PATH.carts, []);
+            const deliveries = readJsonFile<UserDelivery[]>(DB_PATH.deliveries, []);
             const userCart = carts.find(c => String(c.userId) === String(id)) || null;
             const userDeliveries = deliveries.filter(d => String(d.userId) === String(id));
 
-            const { password, ...userWithoutPassword } = user;
-
             return {
                 success: true,
-                user: userWithoutPassword,
+                user: this.toSafeUser(user),
                 cart: userCart,
                 deliveries: userDeliveries
             };
         } catch (error) {
-            return { success: false };
+            return { success: false, message: "Ошибка получения пользователя" };
         }
+    }
+
+    /**
+     * Updates recommendation tags after a user likes a product.
+     *
+     * @param userId User id from cookie/session.
+     * @param tags Hidden product tags.
+     * @returns Updated user recommendation profile.
+     */
+    static addRecommendationTags(userId: string | number, tags: string[]): RecommendationTag[] {
+        const users = this.getUsers();
+        const userIndex = users.findIndex(user => String(user.id) === String(userId));
+
+        if (userIndex === -1) {
+            throw new Error("User not found");
+        }
+
+        const updatedRecommendations = mergeRecommendationTags(users[userIndex].recommendations || [], tags);
+        users[userIndex].recommendations = updatedRecommendations;
+        this.saveUsers(users);
+
+        return updatedRecommendations;
+    }
+
+    /**
+     * Returns active recommendation tags with time decay applied.
+     *
+     * @param userId User id from cookie/session.
+     * @returns Active recommendations sorted by relevance.
+     */
+    static getActiveRecommendations(userId?: string | number): RecommendationTag[] {
+        if (!userId) {
+            return [];
+        }
+
+        const user = this.getUserRecord(userId);
+        return getActiveRecommendationTags(user?.recommendations || []);
     }
 }

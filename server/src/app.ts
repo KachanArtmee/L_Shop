@@ -6,6 +6,7 @@ import authRouter from './router/auth.router';
 import productRouter from './router/product.router';
 import cartRouter from './router/cart.router';
 import deliveryRouter from './router/delivery.router';
+import localeRouter from './router/locale.router';
 import { authMiddleware } from './middleware/auth.middleware';
 import { openApiDocument } from './docs/openapi';
 
@@ -33,6 +34,7 @@ app.get('/openapi.json', (req, res) => {
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
 app.use('/auth', authRouter);
+app.use('/locale', localeRouter);
 app.use('/product', productRouter);
 app.use('/cart', authMiddleware, cartRouter);
 app.use('/delivery', authMiddleware, deliveryRouter);

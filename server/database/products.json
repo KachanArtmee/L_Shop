@@ -5,9 +5,21 @@
     "description": "6 ядер / 12 потоков, отличная производительность для игр и повседневной работы.",
     "price": 18990,
     "isAvailable": true,
-    "categories": [
-      "Процессоры"
-    ],
+    "categories": ["Процессоры"],
+    "tags": ["cpu", "amd", "gaming", "productivity"],
+    "translations": {
+      "ru": {
+        "title": "AMD Ryzen 5 7600",
+        "description": "6 ядер / 12 потоков, отличная производительность для игр и повседневной работы.",
+        "categories": ["Процессоры"]
+      },
+      "en": {
+        "title": "AMD Ryzen 5 7600",
+        "description": "6 cores / 12 threads, strong performance for gaming and everyday work.",
+        "categories": ["Processors"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80&auto=format&fit=crop"
     }
@@ -18,9 +30,21 @@
     "description": "Игровой флагман с 3D V-Cache для максимального FPS в современных проектах.",
     "price": 39990,
     "isAvailable": true,
-    "categories": [
-      "Процессоры"
-    ],
+    "categories": ["Процессоры"],
+    "tags": ["cpu", "amd", "gaming", "premium"],
+    "translations": {
+      "ru": {
+        "title": "AMD Ryzen 7 7800X3D",
+        "description": "Игровой флагман с 3D V-Cache для максимального FPS в современных проектах.",
+        "categories": ["Процессоры"]
+      },
+      "en": {
+        "title": "AMD Ryzen 7 7800X3D",
+        "description": "Gaming flagship with 3D V-Cache for maximum FPS in modern titles.",
+        "categories": ["Processors"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1555617981-dac3880eac6e?w=800&q=80&auto=format&fit=crop"
     }
@@ -31,9 +55,21 @@
     "description": "Производительный процессор для игровых и рабочих сборок среднего и высокого уровня.",
     "price": 28990,
     "isAvailable": true,
-    "categories": [
-      "Процессоры"
-    ],
+    "categories": ["Процессоры"],
+    "tags": ["cpu", "intel", "gaming", "productivity"],
+    "translations": {
+      "ru": {
+        "title": "Intel Core i5-14600KF",
+        "description": "Производительный процессор для игровых и рабочих сборок среднего и высокого уровня.",
+        "categories": ["Процессоры"]
+      },
+      "en": {
+        "title": "Intel Core i5-14600KF",
+        "description": "A powerful processor for mid-range and high-end gaming or workstation builds.",
+        "categories": ["Processors"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
     }
@@ -44,9 +80,21 @@
     "description": "Мощный процессор для стриминга, монтажа и тяжелых многопоточных задач.",
     "price": 46990,
     "isAvailable": true,
-    "categories": [
-      "Процессоры"
-    ],
+    "categories": ["Процессоры"],
+    "tags": ["cpu", "intel", "streaming", "productivity", "premium"],
+    "translations": {
+      "ru": {
+        "title": "Intel Core i7-14700K",
+        "description": "Мощный процессор для стриминга, монтажа и тяжелых многопоточных задач.",
+        "categories": ["Процессоры"]
+      },
+      "en": {
+        "title": "Intel Core i7-14700K",
+        "description": "A powerful CPU for streaming, editing and heavy multi-threaded workloads.",
+        "categories": ["Processors"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800&q=80&auto=format&fit=crop"
     }
@@ -57,9 +105,21 @@
     "description": "Энергоэффективная видеокарта для Full HD-гейминга и работы с контентом.",
     "price": 35990,
     "isAvailable": true,
-    "categories": [
-      "Видеокарты"
-    ],
+    "categories": ["Видеокарты"],
+    "tags": ["gpu", "nvidia", "gaming", "content"],
+    "translations": {
+      "ru": {
+        "title": "NVIDIA GeForce RTX 4060 8GB",
+        "description": "Энергоэффективная видеокарта для Full HD-гейминга и работы с контентом.",
+        "categories": ["Видеокарты"]
+      },
+      "en": {
+        "title": "NVIDIA GeForce RTX 4060 8GB",
+        "description": "An efficient graphics card for Full HD gaming and content work.",
+        "categories": ["Graphics cards"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&q=80&auto=format&fit=crop"
     }
@@ -70,9 +130,21 @@
     "description": "Высокая производительность в 1440p, трассировка лучей и DLSS для комфортной игры.",
     "price": 72990,
     "isAvailable": true,
-    "categories": [
-      "Видеокарты"
-    ],
+    "categories": ["Видеокарты"],
+    "tags": ["gpu", "nvidia", "gaming", "ray-tracing", "premium"],
+    "translations": {
+      "ru": {
+        "title": "NVIDIA GeForce RTX 4070 SUPER 12GB",
+        "description": "Высокая производительность в 1440p, трассировка лучей и DLSS для комфортной игры.",
+        "categories": ["Видеокарты"]
+      },
+      "en": {
+        "title": "NVIDIA GeForce RTX 4070 SUPER 12GB",
+        "description": "High 1440p performance, ray tracing and DLSS for comfortable gaming.",
+        "categories": ["Graphics cards"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1624705002806-5d72df19c3c8?w=800&q=80&auto=format&fit=crop"
     }
@@ -83,9 +155,21 @@
     "description": "Отличный баланс цены и производительности для современных AAA-игр.",
     "price": 61990,
     "isAvailable": true,
-    "categories": [
-      "Видеокарты"
-    ],
+    "categories": ["Видеокарты"],
+    "tags": ["gpu", "amd", "gaming", "value"],
+    "translations": {
+      "ru": {
+        "title": "AMD Radeon RX 7700 XT 12GB",
+        "description": "Отличный баланс цены и производительности для современных AAA-игр.",
+        "categories": ["Видеокарты"]
+      },
+      "en": {
+        "title": "AMD Radeon RX 7700 XT 12GB",
+        "description": "A strong price-to-performance balance for modern AAA games.",
+        "categories": ["Graphics cards"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1612198084033-aade902d1aae?w=800&q=80&auto=format&fit=crop"
     }
@@ -96,9 +180,21 @@
     "description": "Мощная видеокарта с большим видеобуфером для игр в 1440p и 4K.",
     "price": 76990,
     "isAvailable": false,
-    "categories": [
-      "Видеокарты"
-    ],
+    "categories": ["Видеокарты"],
+    "tags": ["gpu", "amd", "gaming", "premium", "4k"],
+    "translations": {
+      "ru": {
+        "title": "AMD Radeon RX 7800 XT 16GB",
+        "description": "Мощная видеокарта с большим видеобуфером для игр в 1440p и 4K.",
+        "categories": ["Видеокарты"]
+      },
+      "en": {
+        "title": "AMD Radeon RX 7800 XT 16GB",
+        "description": "A powerful GPU with a large VRAM buffer for 1440p and 4K gaming.",
+        "categories": ["Graphics cards"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&q=80&auto=format&fit=crop"
     }
@@ -109,9 +205,21 @@
     "description": "Набор 2x16GB, оптимален для современных игровых и рабочих систем.",
     "price": 13990,
     "isAvailable": true,
-    "categories": [
-      "Оперативная память"
-    ],
+    "categories": ["Оперативная память"],
+    "tags": ["ram", "ddr5", "kingston", "gaming"],
+    "translations": {
+      "ru": {
+        "title": "Kingston FURY Beast 32GB DDR5-6000",
+        "description": "Набор 2x16GB, оптимален для современных игровых и рабочих систем.",
+        "categories": ["Оперативная память"]
+      },
+      "en": {
+        "title": "Kingston FURY Beast 32GB DDR5-6000",
+        "description": "A 2x16GB kit optimized for modern gaming and work systems.",
+        "categories": ["Memory"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1562976540-1502c2145186?w=800&q=80&auto=format&fit=crop"
     }
@@ -122,9 +230,21 @@
     "description": "Надежная память с хорошими таймингами для стабильной работы под нагрузкой.",
     "price": 14990,
     "isAvailable": true,
-    "categories": [
-      "Оперативная память"
-    ],
+    "categories": ["Оперативная память"],
+    "tags": ["ram", "ddr5", "corsair", "productivity"],
+    "translations": {
+      "ru": {
+        "title": "Corsair Vengeance 32GB DDR5-5600",
+        "description": "Надежная память с хорошими таймингами для стабильной работы под нагрузкой.",
+        "categories": ["Оперативная память"]
+      },
+      "en": {
+        "title": "Corsair Vengeance 32GB DDR5-5600",
+        "description": "Reliable memory with solid timings for stable work under load.",
+        "categories": ["Memory"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?w=800&q=80&auto=format&fit=crop"
     }
@@ -135,9 +255,21 @@
     "description": "Быстрая память с низким профилем радиаторов для компактных систем.",
     "price": 15990,
     "isAvailable": true,
-    "categories": [
-      "Оперативная память"
-    ],
+    "categories": ["Оперативная память"],
+    "tags": ["ram", "ddr5", "compact", "gaming"],
+    "translations": {
+      "ru": {
+        "title": "G.Skill Ripjaws S5 32GB DDR5-6000",
+        "description": "Быстрая память с низким профилем радиаторов для компактных систем.",
+        "categories": ["Оперативная память"]
+      },
+      "en": {
+        "title": "G.Skill Ripjaws S5 32GB DDR5-6000",
+        "description": "Fast low-profile memory for compact systems.",
+        "categories": ["Memory"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop"
     }
@@ -148,9 +280,21 @@
     "description": "Доступный и проверенный комплект для сборок на платформе DDR4.",
     "price": 7490,
     "isAvailable": true,
-    "categories": [
-      "Оперативная память"
-    ],
+    "categories": ["Оперативная память"],
+    "tags": ["ram", "ddr4", "budget", "value"],
+    "translations": {
+      "ru": {
+        "title": "Patriot Viper Steel 16GB DDR4-3600",
+        "description": "Доступный и проверенный комплект для сборок на платформе DDR4.",
+        "categories": ["Оперативная память"]
+      },
+      "en": {
+        "title": "Patriot Viper Steel 16GB DDR4-3600",
+        "description": "An affordable and proven kit for DDR4 platform builds.",
+        "categories": ["Memory"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1541029071515-84cc54f84dc5?w=800&q=80&auto=format&fit=crop"
     }
@@ -161,9 +305,21 @@
     "description": "Премиальный NVMe SSD PCIe 4.0 с высокой скоростью чтения и записи.",
     "price": 13990,
     "isAvailable": true,
-    "categories": [
-      "SSD"
-    ],
+    "categories": ["SSD"],
+    "tags": ["ssd", "nvme", "samsung", "premium", "gaming"],
+    "translations": {
+      "ru": {
+        "title": "Samsung 990 PRO 1TB",
+        "description": "Премиальный NVMe SSD PCIe 4.0 с высокой скоростью чтения и записи.",
+        "categories": ["SSD"]
+      },
+      "en": {
+        "title": "Samsung 990 PRO 1TB",
+        "description": "A premium PCIe 4.0 NVMe SSD with high read and write speeds.",
+        "categories": ["SSD"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=800&q=80&auto=format&fit=crop"
     }
@@ -174,9 +330,21 @@
     "description": "Игровой NVMe-накопитель с отличной стабильностью и быстрым откликом.",
     "price": 12490,
     "isAvailable": true,
-    "categories": [
-      "SSD"
-    ],
+    "categories": ["SSD"],
+    "tags": ["ssd", "nvme", "wd", "gaming"],
+    "translations": {
+      "ru": {
+        "title": "WD Black SN850X 1TB",
+        "description": "Игровой NVMe-накопитель с отличной стабильностью и быстрым откликом.",
+        "categories": ["SSD"]
+      },
+      "en": {
+        "title": "WD Black SN850X 1TB",
+        "description": "A gaming NVMe drive with strong stability and fast response.",
+        "categories": ["SSD"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1628557044797-f21a177c37ec?w=800&q=80&auto=format&fit=crop"
     }
@@ -187,9 +355,21 @@
     "description": "Быстрый SSD большого объема для игр, проектов и рабочих данных.",
     "price": 18990,
     "isAvailable": true,
-    "categories": [
-      "SSD"
-    ],
+    "categories": ["SSD"],
+    "tags": ["ssd", "nvme", "kingston", "productivity", "capacity"],
+    "translations": {
+      "ru": {
+        "title": "Kingston KC3000 2TB",
+        "description": "Быстрый SSD большого объема для игр, проектов и рабочих данных.",
+        "categories": ["SSD"]
+      },
+      "en": {
+        "title": "Kingston KC3000 2TB",
+        "description": "A fast high-capacity SSD for games, projects and work data.",
+        "categories": ["SSD"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=800&q=80&auto=format&fit=crop"
     }
@@ -200,9 +380,21 @@
     "description": "Универсальный NVMe SSD для повседневных задач и игровых сборок.",
     "price": 8990,
     "isAvailable": true,
-    "categories": [
-      "SSD"
-    ],
+    "categories": ["SSD"],
+    "tags": ["ssd", "nvme", "budget", "value"],
+    "translations": {
+      "ru": {
+        "title": "Crucial P3 Plus 1TB",
+        "description": "Универсальный NVMe SSD для повседневных задач и игровых сборок.",
+        "categories": ["SSD"]
+      },
+      "en": {
+        "title": "Crucial P3 Plus 1TB",
+        "description": "A universal NVMe SSD for daily tasks and gaming builds.",
+        "categories": ["SSD"]
+      }
+    },
+    "reviews": [],
     "images": {
       "preview": "https://images.unsplash.com/photo-1562813733-b31f71025d54?w=800&q=80&auto=format&fit=crop"
     }

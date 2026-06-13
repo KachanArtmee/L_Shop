@@ -24,7 +24,7 @@ body {
 
 .card {
   border: none;
-  border-radius: 15px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
@@ -48,4 +48,115 @@ body {
 .navbar {
   backdrop-filter: blur(10px);
   background: rgba(45, 52, 54, 0.95) !important;
+}
+
+.brand-gradient,
+.section-title {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand-gradient {
+  font-size: 1.5rem;
+}
+
+.hero-section {
+  height: 80vh;
+  min-height: 560px;
+}
+
+.hero-video,
+.hero-fallback,
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-video {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-fallback {
+  background: var(--gradient);
+  z-index: 0;
+}
+
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(108,92,231,0.76), rgba(0,206,201,0.72));
+  z-index: 1;
+}
+
+.hero-copy,
+.hero-loader {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-sound-button {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  z-index: 3;
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  text-decoration: none !important;
+}
+
+.hero-outline {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  background: transparent;
+  border: 0;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.category-card {
+  cursor: pointer;
+}
+
+.feature-band {
+  background: var(--gradient);
+}
+
+.reviews-box {
+  min-height: 72px;
+}
+
+.review-item {
+  padding: 8px;
+  border-radius: 8px;
+  background: #f4f7fb;
 }
